@@ -1,11 +1,12 @@
 import React, { useState } from 'react'
-import { Link } from "react-router-dom";
+import { Link, Navigate } from "react-router-dom";
 import axios from "axios"
 
-function Login() {
+function Login({ user, setUser }) {
 
     const [ email, setEmail ] = useState("")
     const [ password, setPassword ] = useState("")
+    const [ redirect, setRedirect ] = useState(false)
 
     const handleSubmit = async (e) => {
         e.preventDefault()
@@ -15,13 +16,15 @@ function Login() {
         if(email && password){
 
             try {
-                console.log('Email: ' + email + " Senha: " + password)
+                // console.log('Email: ' + email + " Senha: " + password)
         
                 const { data: userDoc } = await axios.post('/users/login', {
                     email, password
                 })
-        
-                console.log(userDoc)
+                
+                setUser(userDoc)
+                setRedirect(true)
+                // console.log(userDoc)
                 
             } catch (error) {
                 alert("Deu erro ao logar: " + error.response.data)
@@ -32,7 +35,10 @@ function Login() {
             alert("Você precisa preencher o email e a senha.")
         }
 
+    }
 
+    if(redirect || user){
+        return <Navigate to="/"/>
     }
 
     return (
