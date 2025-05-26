@@ -1,12 +1,13 @@
 import Header from "./components/Header";
 import Home from "./pages/Home";
-import Login from "./Pages/Login";
-import Register from "./Pages/Register";
+import Login from "./pages/Login";
+import Register from "./pages/Register";
 import { BrowserRouter, Routes, Route } from 'react-router-dom'
 import axios from "axios";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 
 axios.defaults.baseURL = import.meta.env.VITE_AXIOS_BASE_URL
+axios.defaults.withCredentials = true
 // console.log(import.meta.env)
 
 
@@ -14,6 +15,13 @@ axios.defaults.baseURL = import.meta.env.VITE_AXIOS_BASE_URL
 function App() {
 
   const [ user, setUser ] = useState(null)
+
+  useEffect(() => {
+    const axiosGet = async () => {
+      const axiosResponse = await axios.get("/users/profile")
+    }
+    axiosGet()
+  }, [])
 
 
   return (
