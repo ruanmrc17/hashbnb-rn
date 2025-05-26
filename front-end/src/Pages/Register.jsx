@@ -14,27 +14,27 @@ function Register({ setUser }) {
 
 
 
-        // if(email && password){
+        if(email && password && name){
 
-        //     try {
-        //         // console.log('Email: ' + email + " Senha: " + password)
+            try {
+                // console.log('Email: ' + email + " Senha: " + password)
         
-        //         const { data: userDoc } = await axios.post('/users/login', {
-        //             email, password
-        //         })
+                const { data: userDoc } = await axios.post('/users', {
+                    name, email, password
+                })
                 
-        //         setUser(userDoc)
-        //         setRedirect(true)
-        //         // console.log(userDoc)
+                setUser(userDoc)
+                setRedirect(true)
+                // console.log(userDoc)
                 
-        //     } catch (error) {
-        //         alert("Deu erro ao logar: " + error.response.data)
-        //     }
+            } catch (error) {
+                alert("Deu erro ao cadastrar o usuário: " + JSON.stringify(error.response.data))
+            }
 
             
-        // }else{
-        //     alert("Você precisa preencher o email e a senha.")
-        // }
+        }else{
+            alert("Você precisa preencher o email, o nome e a senha.")
+        }
 
     }
 

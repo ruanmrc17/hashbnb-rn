@@ -18,7 +18,8 @@ function App() {
 
   useEffect(() => {
     const axiosGet = async () => {
-      const axiosResponse = await axios.get("/users/profile")
+      const { data } = await axios.get("/users/profile")
+      setUser(data)
     }
     axiosGet()
   }, [])
