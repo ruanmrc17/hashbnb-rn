@@ -23,18 +23,17 @@ router.get('/', async (req, res) => {
     
     
 })
-
+// Para concertar o bug na hora de escrever use o botao INSERT
 router.get('/profile', async (req, res) => {
 
     const { token } = req.cookies
 
     if(token){
-        try {
-            const userInfo = jwt.verify(token, JWT_SECRET_KEY)
+        jwt.verify(token, JWT_SECRET_KEY, {}, (error, userInfo) => {
+            if(error) throw error 
+
             res.json(userInfo)
-        } catch (error) {
-            res.status(500).json(error)
-        }
+        })
         
     }else{
         res.json(null)
@@ -63,13 +62,17 @@ router.post('/', async (req, res) => {
     
 
         const newUserObj = { _id, name, email }
-        const token = jwt.sign(newUserObj, JWT_SECRET_KEY)
-        res.cookie("token", token).json(newUserObj)
+        const token = jwt.sign(newUserObj, JWT_SECRET_KEY, {}, (error, token) => {
+            if (error) throw error 
+
+            res.cookie("token", token).json(newUserObj)
+        })
         
 
 
     } catch (error) {
         res.status(500).json(error)
+        throw error
     }
 
 })
