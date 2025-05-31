@@ -1,5 +1,6 @@
 import React from 'react'
-import { useParams } from 'react-router-dom'
+import { useParams, Link, Navigate } from 'react-router-dom'
+import AccProfile from '../components/AccProfile'
 
 // Começar com o Padding no section 
 // Depois mudar o tamanho máximo da div, e magrin auto (centralizar), dpeois colocar flex, flex col e gap4 espaçamento e flex de coluna, alinhar no centro items-center (div[0])
@@ -9,10 +10,10 @@ import { useParams } from 'react-router-dom'
 
 
 
-function Account() {
+function Account({ user, setUser }) {
 	const { subpage } = useParams()
 	// console.log(useParams())
-
+  var subpages = ['profile', 'bookings', 'places']
 	const buttonClass = (button) => {
 
 		let finalClass = 'rounded-full hover:bg-primary-400 hover:text-white px-4 py-2 cursor-pointer transition'
@@ -25,19 +26,30 @@ function Account() {
 
 	}
 
+  function achar(subpage){
+    if(subpage == 'profile'){
+      return 0
+    }else if(subpage == 'bookings'){
+      return 1
+    }else if(subpage == 'places'){
+      return 2
+    }else{
+      return -1
+    }
+  }
+
   return (
     <section className='p-8'>
-    	<div className='max-w-7xl mx-auto flex flex-col gap-4 items-center'>
+    	<div className='max-w-7xl mx-auto flex flex-col gap-8 items-center'>
         <div className='flex gap-2'>
-          <button className={buttonClass('profile')}>Perfil</button>
-          <button className={buttonClass('bookings')}>Reservas</button>
-          <button className={buttonClass('places')}>Lugares</button>
+          <Link to='/account/profile' className={buttonClass('profile')}>Perfil</Link>
+          <Link to='/account/bookings' className={buttonClass('bookings')}>Reservas</Link>
+        	<Link to='/account/places' className={buttonClass('places')}>Lugares</Link>
         </div>
 
-				<div className='flex flex-col items-center gap-2'>
-					<p>Logado como Ruan Marcos (r@r.com)</p>	
-					<button className='min-w-44 bg-primary-400 cursor-pointer rounded-full px-4 py-2 transition  text-white '>Logout</button>
-				</div>	
+        { subpage === 'profile' && <AccProfile user={user} setUser={setUser}/> }
+        { subpages[achar(subpage)] === undefined && <Navigate to='/account/profile'/>}
+				{/* <AccProfile/> */}
       </div>
   	</section>
   )
