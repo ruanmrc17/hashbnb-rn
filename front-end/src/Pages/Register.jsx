@@ -25,9 +25,9 @@ function Register() {
                 const { data: userDoc } = await axios.post('/users', {
                     name, email, password
                 })
+                setRedirect(true)
                 
                 setUser(userDoc)
-                setRedirect(true)
                 // console.log(userDoc)
                 
             } catch (error) {
