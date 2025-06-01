@@ -1,10 +1,11 @@
 // PascalCase, Primeira letra minuscula, reafce - React Arrow Function Component Export
 import React from "react";
 import { Link } from "react-router-dom";
+import { useUserContext } from "../contexts/UserContext";
 
 
-const Header = ({ user }) => {
-
+const Header = () => {
+    const { user } = useUserContext()
     console.log(user)
 
 return (

@@ -1,9 +1,11 @@
 import React, { useState } from 'react'
 import axios from 'axios'
 import { Navigate } from 'react-router-dom'
+import { useUserContext } from '../contexts/UserContext'
 
 
-function AccProfile({ user, setUser }) {
+function AccProfile() {
+	const { user, setUser } = useUserContext()
 
 	const [redirect, setRedirect] = useState(false)
 

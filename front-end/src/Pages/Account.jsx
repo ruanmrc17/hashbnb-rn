@@ -10,7 +10,7 @@ import AccProfile from '../components/AccProfile'
 
 
 
-function Account({ user, setUser }) {
+function Account() {
 	const { subpage } = useParams()
 	// console.log(useParams())
   var subpages = ['profile', 'bookings', 'places']
@@ -47,7 +47,7 @@ function Account({ user, setUser }) {
         	<Link to='/account/places' className={buttonClass('places')}>Lugares</Link>
         </div>
 
-        { subpage === 'profile' && <AccProfile user={user} setUser={setUser}/> }
+        { subpage === 'profile' && <AccProfile /> }
         { subpages[achar(subpage)] === undefined && <Navigate to='/account/profile'/>}
 				{/* <AccProfile/> */}
       </div>
