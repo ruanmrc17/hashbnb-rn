@@ -93,11 +93,17 @@ router.post('/login', async (req, res) => {
 
             if (passwordCorrect) {
                 const newUserObj = { _id, name, email }
-                const token = jwt.sign(newUserObj, JWT_SECRET_KEY)
+                jwt.sign(newUserObj, JWT_SECRET_KEY, {}, (error, token) => {
+                    if(error){
+                        console.error(error)
+                        res.status(500).json(error)
+                        return;
+                    }
+                    res.cookie("token", token).json(newUserObj)
+                })
 
                 // console.log({ token, JWT_SECRET_KEY })
 
-                res.cookie("token", token).json(newUserObj)
             } else {
                 res.status(400).json("Senha inválida")
             }

@@ -27,9 +27,9 @@ function AccProfile() {
 
   return (
     <div className='flex flex-col items-center gap-4'>
-			<p>Logado como { user?.name } ({ user?.email })</p>	
-			<button onClick={logout} className='min-w-44 bg-primary-400 cursor-pointer rounded-full px-4 py-2 transition  text-white '>Logout</button>
-		</div>	
+		  <p>Logado como { user?.name } ({ user?.email })</p>	
+		  <button onClick={logout} className='min-w-44 bg-primary-400 cursor-pointer rounded-full px-4 py-2 transition  text-white '>Logout</button>
+	  </div>	
   )
 }
 

@@ -1,6 +1,7 @@
 import React from 'react'
 import { useParams, Link, Navigate } from 'react-router-dom'
 import AccProfile from '../components/AccProfile'
+import AccPlaces from '../components/AccPlaces'
 
 // Começar com o Padding no section 
 // Depois mudar o tamanho máximo da div, e magrin auto (centralizar), dpeois colocar flex, flex col e gap4 espaçamento e flex de coluna, alinhar no centro items-center (div[0])
@@ -48,7 +49,8 @@ function Account() {
         </div>
 
         { subpage === 'profile' && <AccProfile /> }
-        { subpages[achar(subpage)] === undefined && <Navigate to='/account/profile'/>}
+        { subpage === 'places' && <AccPlaces /> }
+        {/* { subpages[achar(subpage)] === undefined && <Navigate to='/account/profile'/>} */}
 				{/* <AccProfile/> */}
       </div>
   	</section>
