@@ -7,6 +7,11 @@ function NewPlace() {
   const [ city, setCity ] = useState('')
   const [ photos, setPhotos ] = useState('')
   const [ description, setDescription ] = useState('')
+  const [ extras, setExtras ] = useState('')
+  const [ price, setPrice ] = useState('')
+  const [ checkin, setCheckin ] = useState('')
+  const [ checkout, setCheckout ] = useState('')
+  const [ guests, setGuests ] = useState('')
   
   const handleSubmit = async (e) => {
     e.preventDefault()
@@ -64,8 +69,54 @@ function NewPlace() {
         <label htmlFor='perks' className='text-2xl font-bold'>Comodidades</label>
 
         <Perks/>
-
       </div>
+
+      <div className='ml-2 flex flex-col gap-1'>
+        <label htmlFor='extras' className='text-2xl font-bold'>Informações Extras</label>
+        <textarea id='extras' placeholder='Digite as informações extras do seu lugar...' 
+        className='rounded-2xl border border-gray-300 px-4 py-2 h-56 resize-none'
+        value={extras} onChange={(e) => setExtras(e.target.value)}/>
+      </div>
+
+      <div className='ml-2 flex flex-col gap-1'>
+        <h2 htmlFor='extras' className='ml-2 text-2xl font-bold'>Restrições e Preço</h2>
+        <div className='grid grid-cols-[repeat(auto-fit,minmax(225px,1fr))] gap-6'>
+
+          <div className='flex flex-col gap-2'> 
+            <label className='ml-2 text-xl font-bold' htmlFor="price">Preço</label>
+            <input id='price' type="number" placeholder='500' 
+            className='rounded-full border border-gray-300 px-4 py-2'
+            value={price} onChange={(e) => setPrice(e.target.value)}/>
+            
+          </div>
+          
+          <div className='flex flex-col gap-2'> 
+            <label className='ml-2 text-xl font-bold' htmlFor="checkin">Checkin</label>
+            <input id='checkin' type="text" placeholder='16:00' 
+            className='rounded-full border border-gray-300 px-4 py-2'
+            value={checkin} onChange={(e) => setCheckin(e.target.value)}/>
+            
+          </div>
+          
+          <div className='flex flex-col gap-2'> 
+            <label className='ml-2 text-xl font-bold' htmlFor="checkout">Checkout</label>
+            <input id='checkout' type="text" placeholder='12:00' 
+            className='rounded-full border border-gray-300 px-4 py-2'
+            value={checkout} onChange={(e) => setCheckout(e.target.value)}/>
+            
+          </div>
+          
+          <div className='flex flex-col gap-2'> 
+            <label className='ml-2 text-xl font-bold' htmlFor="guests">N° Convidados</label>
+            <input id='guests' type="number" placeholder='4' 
+            className='rounded-full border border-gray-300 px-4 py-2'
+            value={guests} onChange={(e) => setGuests(e.target.value)}/>
+            
+          </div>
+        </div>
+      </div>
+
+      <button className='hover:bg-primary-500 min-w-44 bg-primary-400 cursor-pointer rounded-full px-4 py-2 transition text-white text-center font-bold'>Salvar Informações</button>
 
     </form>
   )
