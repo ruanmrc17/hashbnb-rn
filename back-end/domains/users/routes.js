@@ -5,6 +5,7 @@ import { connectDb } from '../../config/db.js'
 import User from './model.js'
 import bcrypt from 'bcryptjs'
 import jwt from 'jsonwebtoken'
+import { JWTVerify } from "../../utils/jwtVerify.js"
 
 
 const router = Router();
@@ -28,17 +29,10 @@ router.get('/profile', async (req, res) => {
 
     const { token } = req.cookies
 
-    if(token){
-        jwt.verify(token, JWT_SECRET_KEY, {}, (error, userInfo) => {
-            if(error) throw error 
-
-            res.json(userInfo)
-        })
+    const userInfo = await JWTVerify(req)
+    res.json(userInfo)
         
-    }else{
-        res.json(null)
-
-    }
+        
     
     
     
